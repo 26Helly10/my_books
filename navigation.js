@@ -8,11 +8,13 @@ import {Ionicons} from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs'
-import Bookmarks from './screens/TopTabAllB/bookmarks';
 import Wishlist from './screens/TopTabAllB/wishList';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //top allbooks
 const TopAllBooksNavigation= createMaterialTopTabNavigator();
+
+const Stack =createNativeStackNavigator();
 
 function TopTabsGrup(){
    return(<TopAllBooksNavigation.Navigator
@@ -26,8 +28,7 @@ function TopTabsGrup(){
             backgroundcolor:"#5C469C",
          }}
     }>
-        <TopAllBooksNavigation.Screen name="main" component={AllBooks}/>
-        <TopAllBooksNavigation.Screen name="bookmarks" component={Bookmarks}/>
+        <TopAllBooksNavigation.Screen name="In library" component={AllBooks}/>
         <TopAllBooksNavigation.Screen name="wishlist" component={Wishlist}/>
     </TopAllBooksNavigation.Navigator>)
 }
@@ -40,9 +41,9 @@ function TabGrup() {
             let iconName;
             if (route.name=== "Home"){
                 iconName="home-outline";
-            } else if(route.name=== "NewBook"){
+            } else if(route.name=== "New"){
                 iconName="add-circle-outline";
-            }else if(route.name=== "All"){
+            }else if(route.name=== "Sorted"){
                 iconName="book-outline";
             }else if(route.name=== "Profile"){
                 iconName="person-outline";
@@ -56,10 +57,10 @@ function TabGrup() {
         <TabNavigation.Screen name = "Home"
         component = { Home }
         /> 
-        <TabNavigation.Screen name = "NewBook"
+        <TabNavigation.Screen name = "New"
         component = { NewBook }
         /> 
-        <TabNavigation.Screen name = "All"
+        <TabNavigation.Screen name = "Sorted"
         component = { TopTabsGrup }
         /> 
         <TabNavigation.Screen name = "Profile"
@@ -70,8 +71,5 @@ function TabGrup() {
 }
 
 export default function Navigation() {
-    return ( <NavigationContainer >
-        <TabGrup/>
-        </NavigationContainer>
-    )
+    return <TabGrup/>;
 }
